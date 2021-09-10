@@ -14,7 +14,7 @@ public class BaseConverter {
     public static String decimalToBaseX(int num, int base){
 
         double number = (double) num;
-        Stack stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         String result = "";
         double rem = 0;
         String digits = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ";
