@@ -13,7 +13,7 @@ public class BaseConverter {
      * @param base Base numérica para a qual o decimal será convertido.
      * @return String contendo o resultado da conversão na base desejada.
      */
-    public static String decimalToBaseX(long number, int base){
+    public static String decimalToBaseX(long number, int base) throws IllegalArgumentException {
 
         double num = (double) number;
         Stack<Integer> stack = new Stack<>();
@@ -21,7 +21,7 @@ public class BaseConverter {
         double rem = 0;
 
         if( base  < 2 || 36 < base){
-            return null;
+            throw new IllegalArgumentException("A base deve estar entre 2 e 36");
         }
 
         while(num != 0){
@@ -46,13 +46,13 @@ public class BaseConverter {
      * @param base Base em que se aapresenta o número a ser convertido.
      * @return Decimal inteiro resultante da conversão.
      */
-    public static long baseXToDecimal(String number, int base){
+    public static long baseXToDecimal(String number, int base) throws IllegalArgumentException{
 
         long result = 0;
         String num = "";
 
         if( base  < 2 || 36 < base){
-            return 0;
+            throw new IllegalArgumentException("A base deve estar entre 2 e 36");
         }
 
         for(int i = number.length() - 1; i >= 0; i--){
@@ -83,14 +83,15 @@ public class BaseConverter {
      * @param baseY Base numérica para a qual o número será convertido.
      * @return String contendo o  resultado da conversão.
      */
-    public static String baseXToBaseY(String number, int baseX, int baseY){
+    public static String baseXToBaseY(String number, int baseX, int baseY) throws IllegalArgumentException
+    {
+        
+        if( baseX  < 2 || 36 < baseX || baseY  < 2 || 36 < baseY){
+            throw new IllegalArgumentException("As bases devem estar entre 2 e 36");
+        }
 
         long decimal = baseXToDecimal(number, baseX);
         String result = decimalToBaseX(decimal, baseY);
-
-        if( baseX  < 2 || baseY < 2 || 36 < baseX || 36 < baseY){
-            return null;
-        }
 
         return result;
     }
